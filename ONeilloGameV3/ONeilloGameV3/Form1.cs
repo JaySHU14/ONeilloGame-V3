@@ -29,52 +29,52 @@ namespace ONeilloGameV3
             updateTimer.Start();
         }
 
-        private void FormComponents()
+        private void FormComponents() // set the characteristics of the form
         {
-            int width = (boardSize * cellSize) + 20;
-            int height = boardSize * cellSize + cellSize * 4;
+            int width = (boardSize * cellSize) + 20; // declare the form's width, allow for padding
+            int height = boardSize * cellSize + cellSize * 4; // declare the form's height, allow for info panel to be displayed at the bottom. transferred to design specs
 
-            this.Text = "ONeillo Game V3";
-            this.BackColor = Color.Green;
-            this.Size = new Size(width, height);
+            this.Text = "ONeillo V3"; // set the name of the form at the top of the application
+            this.BackColor = Color.Green; // set the background of the form to green (matches cell colours)
+            this.Size = new Size(width, height); // create a new size for the form, initialising the width and height variables declared previously
 
-            infoPanel.Visible = false;
+            // infoPanel.Visible = false; // at first, we do not want the infoPanel to be visible
         }
 
         private void InitialiseBoard()
         {
-            board[3, 3] = board[4, 4] = 1;
-            board[3, 4] = board[4, 3] = 2;
+            board[3, 4] = board[4, 3] = 1; // set starting black counters
+            board[3, 3] = board[4, 4] = 2; // set starting white counters
         }
 
-        private void SetBoard()
+        private void SetBoard() // this function will create and display the buttons in a list format to represent the board
         {
-            List<Button> buttons = new List<Button>();
+            List<Button> buttons = new List<Button>(); // create a new list for the buttons to be stored to
 
-            for (int row = 0; row < boardSize; row++)
+            for (int row = 0; row < boardSize; row++) // iterate over each row in the size of the board
             {
-                for (int col = 0; col < boardSize; col++)
+                for (int col = 0; col < boardSize; col++) // iterate over each column in the size of the board
                 {
-                    Button button = new Button();
-                    button.Size = new Size(cellSize, cellSize);
-                    button.Location = new Point(col * cellSize, row * cellSize + 30);
-                    button.Click += new EventHandler(CellClicked);
-                    button.Name = "btn_" + row + "_" + col;
+                    Button button = new Button(); // for every individual position on the board, create a new button
+                    button.Size = new Size(cellSize, cellSize); // set the button size to the size of the cells (50x50)
+                    button.Location = new Point(col * cellSize, row * cellSize + 30); // set the locations of the buttons, giving each a unique location to be found by
+                    button.Click += new EventHandler(CellClicked); // creating an event handler to handle the event of a click. when the user clicks a cell, whatever is found in the CellClicked function will run
+                    button.Name = "btn_" + row + "_" + col; // set the name of the button to btn_2_4 etc.
 
-                    if (board[row, col] == 1)
+                    if (board[row, col] == 1) // if the current cell has a value of 1
                     {
-                        button.BackColor = Color.Black;
+                        button.BackColor = Color.Black; // set a black counter to it
                     }
-                    else if (board[row, col] == 2)
+                    else if (board[row, col] == 2) // if the current cell has a value of 2
                     {
-                        button.BackColor = Color.White;
+                        button.BackColor = Color.White; // set a white counter to it
                     }
-                    else
+                    else // it is an empty cell
                     {
-                        button.BackColor = Color.Green;
+                        button.BackColor = Color.Green; // set it to empty (green)
                     }
 
-                    buttons.Add(button);
+                    buttons.Add(button); // add button control to form
                 }
             }
 
@@ -91,8 +91,7 @@ namespace ONeilloGameV3
             {
                 MakeMove(row, col);
 
-                //Update the board on the UI thread
-                UpdateBoard();
+                UpdateBoard(); // update the board on the UI thread
 
                 if (GameOver())
                 {
@@ -265,7 +264,7 @@ namespace ONeilloGameV3
 
             if (blackCount > whiteCount)
             {
-                MessageBox.Show("Black Wins!");
+                MessageBox.Show("Black Wins!"); // textbox1,2.
             }
             else if (whiteCount > blackCount)
             {
@@ -290,7 +289,7 @@ namespace ONeilloGameV3
 
         private void informationPanelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //infoPanel.Visible = informationPanelToolStripMenuItem.Checked;
+            infoPanel.Visible = informationPanelToolStripMenuItem.Checked;
         }
 
         private void newGameMenuItem_Click(object sender, EventArgs e)
@@ -302,14 +301,14 @@ namespace ONeilloGameV3
 
         private void ClearButtons()
         {
-            //Loop through all of the Controls
-            foreach (Control control in Controls)
+            foreach (Control control in Controls) // loop through every control
             {
-                //Check if the Control is a Button with the right name format
-                if (control is Button && control.Name.StartsWith("btn_"))
+                //check if the control is a button with the right name format
+                //if (control is Button && control.Name.StartsWith("btn_"))
+
+                if (control is Button && control.BackColor == Color.Black || control.BackColor == Color.White)
                 {
-                    //Remove the Control from the Form
-                    Controls.Remove(control);
+                    Controls.Remove(control); // remove the control from the form
                     control.Dispose();
                 }
             }
@@ -322,9 +321,10 @@ namespace ONeilloGameV3
 
         private void newGameTab_Click(object sender, EventArgs e)
         {
-            ClearButtons();
-            InitialiseBoard();
+            //ClearButtons();
+            //InitialiseBoard();
             SetBoard();
+            UpdateBoard();
             blackCount = 0;
             whiteCount = 0;
         }
