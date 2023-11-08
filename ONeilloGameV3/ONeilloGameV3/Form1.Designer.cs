@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.infoPanel = new System.Windows.Forms.Panel();
+            this.player2ScoreLabel = new System.Windows.Forms.Label();
+            this.player1ScoreLabel = new System.Windows.Forms.Label();
             this.player2TextBox = new System.Windows.Forms.TextBox();
             this.player1TextBox = new System.Windows.Forms.TextBox();
             this.statusLabel1 = new System.Windows.Forms.Label();
@@ -48,39 +50,59 @@
             // infoPanel
             // 
             this.infoPanel.BackColor = System.Drawing.Color.ForestGreen;
+            this.infoPanel.Controls.Add(this.player2ScoreLabel);
+            this.infoPanel.Controls.Add(this.player1ScoreLabel);
             this.infoPanel.Controls.Add(this.player2TextBox);
             this.infoPanel.Controls.Add(this.player1TextBox);
             this.infoPanel.Controls.Add(this.statusLabel1);
             this.infoPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.infoPanel.Location = new System.Drawing.Point(0, 570);
-            this.infoPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.infoPanel.Location = new System.Drawing.Point(0, 463);
             this.infoPanel.Name = "infoPanel";
-            this.infoPanel.Size = new System.Drawing.Size(539, 120);
+            this.infoPanel.Size = new System.Drawing.Size(404, 98);
             this.infoPanel.TabIndex = 0;
+            // 
+            // player2ScoreLabel
+            // 
+            this.player2ScoreLabel.AutoSize = true;
+            this.player2ScoreLabel.Location = new System.Drawing.Point(299, 59);
+            this.player2ScoreLabel.Name = "player2ScoreLabel";
+            this.player2ScoreLabel.Size = new System.Drawing.Size(84, 13);
+            this.player2ScoreLabel.TabIndex = 4;
+            this.player2ScoreLabel.Text = "Current Score: 2";
+            // 
+            // player1ScoreLabel
+            // 
+            this.player1ScoreLabel.AutoSize = true;
+            this.player1ScoreLabel.Location = new System.Drawing.Point(22, 59);
+            this.player1ScoreLabel.Name = "player1ScoreLabel";
+            this.player1ScoreLabel.Size = new System.Drawing.Size(84, 13);
+            this.player1ScoreLabel.TabIndex = 3;
+            this.player1ScoreLabel.Text = "Current Score: 2";
             // 
             // player2TextBox
             // 
-            this.player2TextBox.Location = new System.Drawing.Point(382, 56);
+            this.player2TextBox.Location = new System.Drawing.Point(283, 28);
+            this.player2TextBox.Margin = new System.Windows.Forms.Padding(2);
             this.player2TextBox.Name = "player2TextBox";
-            this.player2TextBox.Size = new System.Drawing.Size(145, 22);
+            this.player2TextBox.Size = new System.Drawing.Size(110, 20);
             this.player2TextBox.TabIndex = 2;
             this.player2TextBox.Text = "Player #2";
             // 
             // player1TextBox
             // 
-            this.player1TextBox.Location = new System.Drawing.Point(12, 56);
+            this.player1TextBox.Location = new System.Drawing.Point(11, 28);
+            this.player1TextBox.Margin = new System.Windows.Forms.Padding(2);
             this.player1TextBox.Name = "player1TextBox";
-            this.player1TextBox.Size = new System.Drawing.Size(145, 22);
+            this.player1TextBox.Size = new System.Drawing.Size(110, 20);
             this.player1TextBox.TabIndex = 1;
             this.player1TextBox.Text = "Player #1";
             // 
             // statusLabel1
             // 
             this.statusLabel1.AutoSize = true;
-            this.statusLabel1.Location = new System.Drawing.Point(211, 14);
-            this.statusLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.statusLabel1.Location = new System.Drawing.Point(158, 11);
             this.statusLabel1.Name = "statusLabel1";
-            this.statusLabel1.Size = new System.Drawing.Size(131, 16);
+            this.statusLabel1.Size = new System.Drawing.Size(106, 13);
             this.statusLabel1.TabIndex = 0;
             this.statusLabel1.Text = "Current Player: Black";
             // 
@@ -93,7 +115,8 @@
             this.aboutToolStripMenuItem});
             this.informationPanelMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.informationPanelMenuStrip.Name = "informationPanelMenuStrip";
-            this.informationPanelMenuStrip.Size = new System.Drawing.Size(539, 28);
+            this.informationPanelMenuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.informationPanelMenuStrip.Size = new System.Drawing.Size(404, 24);
             this.informationPanelMenuStrip.TabIndex = 1;
             this.informationPanelMenuStrip.Text = "menuStrip1";
             // 
@@ -103,20 +126,20 @@
             this.newGameTab,
             this.saveGameTab});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(62, 24);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(50, 20);
             this.toolStripMenuItem1.Text = "Game";
             // 
             // newGameTab
             // 
             this.newGameTab.Name = "newGameTab";
-            this.newGameTab.Size = new System.Drawing.Size(166, 26);
+            this.newGameTab.Size = new System.Drawing.Size(132, 22);
             this.newGameTab.Text = "New Game";
             this.newGameTab.Click += new System.EventHandler(this.newGameTab_Click);
             // 
             // saveGameTab
             // 
             this.saveGameTab.Name = "saveGameTab";
-            this.saveGameTab.Size = new System.Drawing.Size(166, 26);
+            this.saveGameTab.Size = new System.Drawing.Size(132, 22);
             this.saveGameTab.Text = "Save Game";
             // 
             // settingsToolStripMenuItem
@@ -125,7 +148,7 @@
             this.informationPanelToolStripMenuItem,
             this.speakToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // informationPanelToolStripMenuItem
@@ -133,32 +156,31 @@
             this.informationPanelToolStripMenuItem.Checked = true;
             this.informationPanelToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.informationPanelToolStripMenuItem.Name = "informationPanelToolStripMenuItem";
-            this.informationPanelToolStripMenuItem.Size = new System.Drawing.Size(209, 26);
+            this.informationPanelToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.informationPanelToolStripMenuItem.Text = "Information Panel";
             // 
             // speakToolStripMenuItem
             // 
             this.speakToolStripMenuItem.Name = "speakToolStripMenuItem";
-            this.speakToolStripMenuItem.Size = new System.Drawing.Size(209, 26);
+            this.speakToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.speakToolStripMenuItem.Text = "Speak";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(539, 690);
+            this.ClientSize = new System.Drawing.Size(404, 561);
             this.Controls.Add(this.infoPanel);
             this.Controls.Add(this.informationPanelMenuStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.informationPanelMenuStrip;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
@@ -186,6 +208,8 @@
         private System.Windows.Forms.ToolStripMenuItem speakToolStripMenuItem;
         private System.Windows.Forms.TextBox player2TextBox;
         private System.Windows.Forms.TextBox player1TextBox;
+        private System.Windows.Forms.Label player2ScoreLabel;
+        private System.Windows.Forms.Label player1ScoreLabel;
     }
 }
 

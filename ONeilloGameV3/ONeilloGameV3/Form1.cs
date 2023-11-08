@@ -69,9 +69,17 @@ namespace ONeilloGameV3
                     {
                         button.BackColor = Color.White; // set a white counter to it
                     }
-                    else // it is an empty cell
+                    else
                     {
-                        button.BackColor = Color.Green; // set it to empty (green)
+                        if (ValidMove(row, col))
+                        {
+                            button.BackColor = Color.LightGreen; // change cell colour for a valid move
+                        }
+
+                        else // it is an empty cell
+                        {
+                            button.BackColor = Color.Green; // set it to empty (green)
+                        }
                     }
 
                     buttons.Add(button); // add button control to form
@@ -111,6 +119,15 @@ namespace ONeilloGameV3
 
             board[row, col] = currentPlayer;
 
+            if (currentPlayer == 1)
+            {
+                blackCount++;
+            }
+            else
+            {
+                whiteCount++;
+            }
+
             for (int i = 0; i < 8; i++)
             {
                 int r = row + directionRow[i];
@@ -149,6 +166,15 @@ namespace ONeilloGameV3
                     }
                 }
             }
+
+            /*if (currentPlayer == 1)
+            {
+                currentPlayer = 2;
+            }
+            else
+            {
+                currentPlayer = 1;
+            }*/
         }
 
         private bool ValidMove(int row, int col)
@@ -201,6 +227,9 @@ namespace ONeilloGameV3
 
         private void UpdateBoard()
         {
+            player1ScoreLabel.Text = "Current Score:" + blackCount.ToString();
+            player2ScoreLabel.Text = "Current Score:" + whiteCount.ToString();
+
             for (int row = 0; row < boardSize; row++)
             {
                 for (int col = 0; col < boardSize; col++)
@@ -221,8 +250,17 @@ namespace ONeilloGameV3
                         }
                         else
                         {
-                            button.BackColor = Color.Green;
-                            button.Enabled = ValidMove(row, col);
+                            if (ValidMove(row, col))
+                            {
+                                button.BackColor = Color.LightGreen;
+                                //button.Enabled = ValidMove(row, col);
+                                button.Enabled = true;
+                            }
+                            else
+                            {
+                                button.BackColor = Color.Green;
+                                button.Enabled = false;
+                            }
                         }
                     }
                 }
@@ -299,19 +337,43 @@ namespace ONeilloGameV3
             SetBoard();
         }
 
-        private void ClearButtons()
+        /*private void ClearButtons()
         {
             foreach (Control control in Controls) // loop through every control
             {
                 //check if the control is a button with the right name format
                 //if (control is Button && control.Name.StartsWith("btn_"))
 
-                if (control is Button && control.BackColor == Color.Black || control.BackColor == Color.White)
+                if (control is Button && control.BackColor != Color.Green)
                 {
                     Controls.Remove(control); // remove the control from the form
                     control.Dispose();
                 }
             }
+
+            blackCount = 0;
+            whiteCount = 0;
+        }*/
+
+        private void ClearButtons()
+        {
+            foreach (Control control in Controls)
+            {
+                Button button = control as Button;
+                if (button != null)
+                {
+                    int row, col;
+                    if (int.TryParse(button.Name.Split('_')[1], out row) && int.TryParse(button.Name.Split('_')[2], out col))
+                    {
+                        board[row, col] = 0; // reset the value of the board cell
+                        button.Enabled = false; // disable the button
+                        button.BackColor = Color.Green; // reset the button color to green
+                    }
+                }
+            }
+
+            blackCount = 0;
+            whiteCount = 0;
         }
 
         private void gameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -321,8 +383,8 @@ namespace ONeilloGameV3
 
         private void newGameTab_Click(object sender, EventArgs e)
         {
-            //ClearButtons();
-            //InitialiseBoard();
+            ClearButtons();
+            InitialiseBoard();
             SetBoard();
             UpdateBoard();
             blackCount = 0;
