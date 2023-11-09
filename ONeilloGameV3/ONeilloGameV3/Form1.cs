@@ -38,7 +38,12 @@ namespace ONeilloGameV3
             this.BackColor = Color.Green; // set the background of the form to green (matches cell colours)
             this.Size = new Size(width, height); // create a new size for the form, initialising the width and height variables declared previously
 
-            // infoPanel.Visible = false; // at first, we do not want the infoPanel to be visible
+            infoPanel.Visible = false; // at first, we do not want the infoPanel to be visible
+
+            if (informationPanelToolStripMenuItem.Checked )
+            {
+                infoPanel.Visible = true;
+            }
         }
 
         private void InitialiseBoard()
@@ -117,16 +122,11 @@ namespace ONeilloGameV3
             int[] directionRow = { -1, -1, -1, 0, 1, 1, 1, 0 };
             int[] directionCol = { -1, 0, 1, 1, 1, 0, -1, -1 };
 
+            int newCount = 0;
+
             board[row, col] = currentPlayer;
 
-            if (currentPlayer == 1)
-            {
-                blackCount++;
-            }
-            else
-            {
-                whiteCount++;
-            }
+            
 
             for (int i = 0; i < 8; i++)
             {
@@ -161,12 +161,21 @@ namespace ONeilloGameV3
                             r -= directionRow[i];
                             c -= directionCol[i];
                             board[r, c] = currentPlayer;
+                            newCount++;
                         }
                         break;
                     }
                 }
             }
 
+            if (currentPlayer == 1)
+            {
+                blackCount += newCount + 1;
+            }
+            else
+            {
+                whiteCount += newCount + 1;
+            }
             /*if (currentPlayer == 1)
             {
                 currentPlayer = 2;
@@ -302,11 +311,11 @@ namespace ONeilloGameV3
 
             if (blackCount > whiteCount)
             {
-                MessageBox.Show("Black Wins!"); // textbox1,2.
+                MessageBox.Show("Black wins!"); // textbox1,2.
             }
             else if (whiteCount > blackCount)
             {
-                MessageBox.Show("White Wins!");
+                MessageBox.Show("White wins!");
             }
             else
             {
