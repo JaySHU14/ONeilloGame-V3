@@ -13,8 +13,8 @@ namespace ONeilloGameV3
         private const int cellSize = 50;
         private int[,] board = new int[boardSize, boardSize];
         private int currentPlayer = 1;
-        private int blackCount = 0;
-        private int whiteCount = 0;
+        private int blackCount = 2;
+        private int whiteCount = 2;
         private Timer updateTimer;
 
         public Form1()
@@ -372,8 +372,8 @@ namespace ONeilloGameV3
                 }
             }
 
-            blackCount = 0;
-            whiteCount = 0;
+            blackCount = 2;
+            whiteCount = 2;
         }
 
         private void gameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -387,8 +387,8 @@ namespace ONeilloGameV3
             InitialiseBoard();
             SetBoard();
             UpdateBoard();
-            blackCount = 0;
-            whiteCount = 0;
+            blackCount = 2;
+            whiteCount = 2;
         }
     }
 }
